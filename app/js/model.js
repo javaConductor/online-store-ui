@@ -54,7 +54,6 @@ define("model", ["backbone"], function (Backbone) {
     }),
     Customer: Backbone.Model.extend({
 
-
       defaults: {
         id: "",
         name: "",
@@ -66,7 +65,8 @@ define("model", ["backbone"], function (Backbone) {
       },
 
 
-    });
+    }),
+
   }
   self = obj;
   return obj;
