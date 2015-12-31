@@ -11,17 +11,24 @@ define("model", ["backbone"], function (Backbone) {
       defaults: {
         id: "",
         name: "",
-        optionDefinitions: {},
+        optionDefinitions: null,
         categoryId: "",
         description: "",
         weightInOunces: 0.0,
-        extraInfo: {},
+        extraInfo: null,
         currency: "USD",
         price: -1,
         status: "NOT-AVAILABLE",
-        mediaFileIds: {},
-        inventoryIds: [],
-        _links: {}
+        mediaFileIds: null,
+        inventoryIds: null,
+        _links: null
+      },
+      initialize: function(){
+        this.set("optionDefinitions", {} );
+        this.set("extraInfo", {} );
+        this.set("mediaFileIds", {} );
+        this.set("inventoryIds", [] );
+        this.set("_links", [] );
       },
       validate: function (attrs, options) {
         if (!attrs.name) {
@@ -45,6 +52,21 @@ define("model", ["backbone"], function (Backbone) {
         return link.href;
       }
     }),
+    Customer: Backbone.Model.extend({
+
+
+      defaults: {
+        id: "",
+        name: "",
+        email: "",
+        status: "NOT-AVAILABLE",
+        mediaFileIds: null,
+        inventoryIds: null,
+        _links: null
+      },
+
+
+    });
   }
   self = obj;
   return obj;
