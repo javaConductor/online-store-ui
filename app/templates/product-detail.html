@@ -1,0 +1,70 @@
+<div class="grid product-single">
+  <div class="grid_item medium-up--one-half"-->
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="main-content">
+            <div class="col-md-12">
+              <a href="#">
+                <img class="img-responsive img-product img-hover" src="<%= mainImageLink %>" alt="">
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <!--Nested rows within a column-->
+          <div class="row">
+            <!--div class="col-xs-12"-->
+            <div class="sidebar-content">
+              <div class="product-title">
+                <h3 class="product-title"><%= name %></h3>
+              </div>
+              <!--div class="col-md-6 col-sm-0"-->
+              <div class="col-md-10 col-sm-2">
+                <div class="product-cost-content">
+                  <h3>$<%= price.toFixed(2)</h3>
+                </div>
+                <% if (brandName) {  %>
+                <div class="product-brand-content">
+                  <h4>Brand: <span class="medium" style="color:gray;font-weight:bold">Gucci</span></h4>
+                </div>
+                <% } %>
+                <div class="addtocart-content">
+                  <button type="button" class="btn btn-warning btn-lg"><span class="glyphicon glyphicon-shopping-cart"></span>Add To Cart</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-8">
+        <div class="product-description-title">
+          <h3>Product Description</h3>
+        </div>
+        <div class="product-title">
+          <h4><%= name %></h4>
+        </div>
+        <div class="product-description">
+          <span><%= description %></span>
+        </div>
+        <div class="product-attributes">
+          <table>
+            <% _.each(extraInfo, function( value, key){ %>
+            <tr><th><%= key %></th><td><%= value %></td></tr>
+            <% });  %>
+          </table>
+        </div>
+      </div>
+    </div>
+    <hr><!--  line --------------------------------------------------------------------------------------------------------------------------------------->
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

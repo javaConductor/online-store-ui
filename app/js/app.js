@@ -7,6 +7,7 @@ define("online-store",
 
 
 
+
     //Define data object in here.
     return {
       init: dataService.getProducts,

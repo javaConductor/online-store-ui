@@ -1,7 +1,7 @@
 /**
  * Created by lcollins on 12/29/2015.
  */
-define("model", ["backbone"], function (Backbone) {
+define("productModel", ["backbone"], function (Backbone) {
 
   var prefix = "http://" + window.location.hostname + ":8889/";
 
@@ -9,16 +9,16 @@ define("model", ["backbone"], function (Backbone) {
 
     ProductCollection: Backbone.Collection.extend({
       model: self.Product,
+      url: prefix + "product",
       parse:function(response){
 
         /// take the main image link out of the _links array
         // and make it a first-class member for the UI only.
-        var mainImageLink = _links.find(function (lnk) {
-          return lnk.rel == "main"
+        var mainImageLink = response._links.find(function (lnk) {
+          return lnk.rel == "main";
         });
-        this.set("mainImageLink", mainImageLink);
-
-
+        response.mainImageLink = mainImageLink;
+        return response;
       },
 
     }),
