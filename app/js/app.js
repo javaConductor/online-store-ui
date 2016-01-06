@@ -1,19 +1,21 @@
-define("online-store",
-  ["jquery",'model'],
-  function($, Model) {
+define("app",
+  ["jquery", 'routes/appRouter', "backbone"],
+  function ($, Router, Backbone ) {
+    console.log("creating app: Router: "+Router+ " backbone:"+Backbone+ " $:"+$);
+    var router = new Router({});
+    router.on('route:main', function(actions) {
+      alert(actions);
+    });
 
+// Start Backbone history a necessary step for bookmarkable URL's
+    Backbone.history.start();
+    var self;
+    var obj = {
+      start: function(){
+      }
+    };
 
-
-
-
-
-
-    //Define data object in here.
-    return {
-      init: dataService.getProducts,
-
-    }
-
+    self = obj;
+    return obj;
   }
-
-)
+);

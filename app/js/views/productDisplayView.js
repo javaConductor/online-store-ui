@@ -1,24 +1,24 @@
 /**
  * Created by lcollins on 12/27/2015.
  */
-define("views/productListView",
+define("views/productDisplayView",
   ["model/productModel",
     "q",
-    "backbone"
+    "backbone",
+    "services/templateService"
   ],
-  function (ProductModel, Q, Backbone) {
+  function (ProductModel, Q, Backbone, templateService) {
 
   var prefix = "http://" + window.location.hostname + ":8889/";
 
     return  Backbone.View.extend({
       initialize: function(options) {
-
+        this.category = options.category;
       },
-
-      className: "product",
-      collection: ProductModel.ProductCollection,
-      model: ProductModel.Product,
-      template: _.template($('#product-template').html()),
+      tagName: "tr",
+      className: "category",
+      model: ProductModel.ProductCollection,
+      template: templateService.getProductDisplayTemplate(),
       assign : function (selector, view) {
         var selectors;
         if (_.isObject(selector)) {
@@ -35,8 +35,17 @@ define("views/productListView",
       },
       render: function () {
         this.$el.html(this.template(this.model.attributes));
+
+        _.each(
+          _.map(this.category.children, function (subCat) {
+            return new CategoryProductView({
+              category: subCat
+            });
+          }), function (subCat) {
+            this.$el.append(p);
+          }
+        );
         return this;
       },
     });
-
 });

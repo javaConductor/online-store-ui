@@ -4,17 +4,19 @@
 require.config({
   baseUrl: "/js",
   paths: {
-    "jquery": "libs/jquery/dist/jquery.min.js",
-    "bootstrap": "libs/bootstrap/dist/js/bootstrap.min.js",
-    "q": "libs/q/q.js",
-    "underscore": "libs/underscore/underscore-min.js",
-    backbone: 'libs/backbone/backbone-min.js',
-    'backbone.localStorage': 'libs/backbone.localStorage/backbone.localStorage.js',
-    "less": "libs/less/dist/less.min.js"
+    "jquery": "/libs/jquery/dist/jquery.min",
+    "bootstrap": "/libs/bootstrap/dist/js/bootstrap.min",
+    "q": "/libs/q/q",
+    "underscore": "/libs/underscore/underscore-min",
+    backbone: '/libs/backbone/backbone-min',
+    'backbone.localStorage': '/libs/backbone.localStorage/backbone.localStorage'
   },
   shim: {
     underscore: {
       exports: "_"
+    },
+    q: {
+      exports: "q"
     },
     backbone: {
       deps: ['underscore', 'jquery'],
@@ -22,7 +24,7 @@ require.config({
     },
     'backbone.localStorage': {
       deps: ['backbone'],
-      exports: 'Backbone'
+      exports: 'Backbone.localStorage'
     }
   },
   waitSeconds: 15

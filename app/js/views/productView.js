@@ -1,21 +1,21 @@
 /**
  * Created by lcollins on 12/27/2015.
  */
-define("ProductView",
+define("views/productView",
   ["model/productModel",
     "q",
-    "backbone", "templateService"
+    "backbone",     "services/templateService"
   ],
   function (ProductModel, Q, Backbone, templateService) {
 
   var prefix = "http://" + window.location.hostname + ":8889/";
 
-    return  Backbone.View.Extend({
+    return  Backbone.View.extend({
       initialize: function(options) {
 
       },
 
-      className: ".product",
+      className: "product",
       model: ProductModel.ProductCollection,
       template: templateService.getProductTemplate(),
       assign : function (selector, view) {

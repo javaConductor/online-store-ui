@@ -22,6 +22,14 @@ define("data", ["q"], function (Q) {
       return p;
     },
 
+    getProduct:function(id){
+      var p = Q($.get(prefix + "product/"+id));
+      p.fail( function(err){
+        console.log("getProducts Error: "+err)
+      });
+      return p;
+    },
+
     getCategoryTree:function(){
       var p = Q($.get(prefix + "category/tree"));
       p.fail( function(err){

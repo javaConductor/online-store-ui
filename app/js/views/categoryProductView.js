@@ -1,24 +1,23 @@
 /**
  * Created by lcollins on 12/27/2015.
  */
-define("views/productListView",
+define("views/categoryProductView",
   ["model/productModel",
     "q",
-    "backbone"
+    "backbone", "services/templateService", "ProductView"
   ],
-  function (ProductModel, Q, Backbone) {
+  function (ProductModel, Q, Backbone, templateService) {
 
   var prefix = "http://" + window.location.hostname + ":8889/";
 
     return  Backbone.View.extend({
       initialize: function(options) {
-
+        this.model = options.category
       },
 
+      tagName: "tr",
       className: "product",
-      collection: ProductModel.ProductCollection,
-      model: ProductModel.Product,
-      template: _.template($('#product-template').html()),
+      template: templateService.getCategoryProductTemplate(),
       assign : function (selector, view) {
         var selectors;
         if (_.isObject(selector)) {

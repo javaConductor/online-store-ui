@@ -1,12 +1,16 @@
 /**
  * Created by lcollins on 12/29/2015.
  */
-define("productModel", ["backbone"], function (Backbone) {
+define("model/productModel", ["backbone"], function (Backbone) {
 
   var prefix = "http://" + window.location.hostname + ":8889/";
 
   var obj = {
 
+    CategoryCollection: Backbone.Collection.extend({
+      model: self.Category,
+      url: prefix + "category"
+    }),
     ProductCollection: Backbone.Collection.extend({
       model: self.Product,
       url: prefix + "product",
@@ -76,6 +80,20 @@ define("productModel", ["backbone"], function (Backbone) {
         status: "NOT-AVAILABLE",
         mediaFileIds: null,
         inventoryIds: null,
+        _links: null
+      },
+
+
+    }),
+
+    Category: Backbone.Model.extend({
+
+      defaults: {
+        id: "",
+        name: "",
+        displayName: "",
+        children: [],
+        classifier : false,
         _links: null
       },
 
