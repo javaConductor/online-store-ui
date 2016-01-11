@@ -10,18 +10,24 @@ define("routes/appRouter",
 
       routes: {
         "product/:id": "showProductDetail",   // #search/kiwis/p7
+        "category/:categoryId/products": "showCategoryProductList",   // #search/kiwis/p7
         "*main": "main"
       },
 
       main: function () {
         alert("route: main")
       },
+
+      showCategoryProductList: function (categoryId) {
+        cate
+      },
+
       showProductDetail: function (productId) {
 
-        $("#main").empty();
         productService.getProduct(productId).then(
           function (product) {
             /// add the product to the template
+            $("#main").empty();
             productService.createProductDetailView($("#main"), product).then(function(v){
               v.render();
             });

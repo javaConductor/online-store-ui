@@ -14,6 +14,16 @@ define("services/productService",
     var obj =  {
 
       createProductDetailView : function($parent, product){
+        return templateService.getProductDetailTemplate().then(function(template){
+          return  new ProductView({
+            el: $parent,
+            model: product,
+            template: template
+          });
+        });
+      },
+
+      createProductCompactView : function($parent, product){
         return templateService.getProductTemplate().then(function(template){
           return  new ProductView({
             el: $parent,

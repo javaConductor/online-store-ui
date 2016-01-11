@@ -16,6 +16,7 @@ define("views/categoryProductView",
       },
 
       tagName: "tr",
+
       className: "product",
       template: templateService.getCategoryProductTemplate(),
       assign : function (selector, view) {

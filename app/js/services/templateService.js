@@ -10,6 +10,10 @@ define("services/templateService",["jquery", "q"], function ($, Q) {
     var obj =  {
 
       getProductTemplate : function(){
+        return self.getTemplate("product.html")
+      },
+
+      getProductDetailTemplate : function(){
         return self.getTemplate("product-detail.html")
       },
 
@@ -27,7 +31,6 @@ define("services/templateService",["jquery", "q"], function ($, Q) {
           return template;
         });
       },
-
     };
   self = obj;
   return obj;

@@ -1,0 +1,86 @@
+.product {
+  background-color: #5B83AD;
+}
+.header {
+  text-align: center;
+  margin: auto;
+  min-height: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 0px;
+}
+.main-content {
+  min-height: 130px;
+  /*background: #dbdfe5;*/
+}
+.main {
+  min-height: 130px;
+  min-width: 70%;
+  background-color: #5B83AD;
+  color: gold;
+  /*background: #dbdfe5;*/
+}
+.sidebar-content {
+  min-height: 150px;
+  margin-bottom: 30px;
+  /*background: #b4bac0;*/
+}
+.product-title {
+  min-height: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 0px;
+}
+.product-name {
+  background-color: #5B83AD;
+}
+.product-cost-content {
+  min-height: 50px;
+  background: #f8f8f8;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 0px;
+  border-style: solid;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+}
+.product-brand-content {
+  min-height: 50px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 0px;
+  border-style: solid;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+}
+.addtocart-content {
+  min-height: 50px;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  padding-left: 0px;
+}
+.product-description-title {
+  min-height: 15px;
+  padding-top: 30px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+}
+.product-description {
+  min-height: 0px;
+  padding-top: 0px;
+  padding-bottom: 15px;
+  padding-left: 0px;
+}
+.product-attributes {
+  min-height: 30px;
+  padding-top: 0px;
+  padding-bottom: 5px;
+  padding-left: 0px;
+}
+ul {
+  list-style: square url("/assets/img/sqgold.jpg");
+}

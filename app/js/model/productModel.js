@@ -90,10 +90,7 @@ define("model/productModel", ["backbone"], function (Backbone) {
           var mainImageLink = (product._links || []).find(function (lnk) {
             return lnk.rel == "main";
           });
-          if (mainImageLink)
-            product.mainImageLink = mainImageLink.href;
-          else
-            product.mainImageLink = "/images/no_image_available.jpg";
+          product.mainImageLink = (mainImageLink) ? mainImageLink.href :  "/images/no_image_available.jpg";
           return product;
         });
       }
