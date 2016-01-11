@@ -19,7 +19,7 @@ define("model", ["backbone"], function (Backbone) {
         this.set("mainImageLink", mainImageLink);
 
 
-      },
+      }
 
     }),
     Product: Backbone.Model.extend({

@@ -5,28 +5,40 @@ define("model/productModel", ["backbone"], function (Backbone) {
 
   var prefix = "http://" + window.location.hostname + ":8889/";
 
-  var obj = {
+  console.log("creating productModel");
+  var obj = {};
 
-    CategoryCollection: Backbone.Collection.extend({
-      model: self.Category,
+  obj['Customer'] = Backbone.Model.extend({
+
+    defaults: {
+      id: "",
+      name: "",
+      email: "",
+      status: "NOT-AVAILABLE",
+      mediaFileIds: null,
+      inventoryIds: null,
+      _links: null
+    }
+  });
+
+    obj['Category'] = Backbone.Model.extend({
+
+      defaults: {
+        id: "",
+        name: "",
+        displayName: "",
+        children: [],
+        classifier: false,
+        _links: null
+      }
+    });
+
+    obj['CategoryCollection'] = Backbone.Collection.extend({
+      model: obj.Category,
       url: prefix + "category"
-    }),
-    ProductCollection: Backbone.Collection.extend({
-      model: self.Product,
-      url: prefix + "product",
-      parse:function(response){
+    });
 
-        /// take the main image link out of the _links array
-        // and make it a first-class member for the UI only.
-        var mainImageLink = response._links.find(function (lnk) {
-          return lnk.rel == "main";
-        });
-        response.mainImageLink = mainImageLink;
-        return response;
-      },
-
-    }),
-    Product: Backbone.Model.extend({
+    obj['Product'] = Backbone.Model.extend({
       defaults: {
         id: "",
         name: "",
@@ -42,12 +54,12 @@ define("model/productModel", ["backbone"], function (Backbone) {
         inventoryIds: null,
         _links: null
       },
-      initialize: function(){
-        this.set("optionDefinitions", {} );
-        this.set("extraInfo", {} );
-        this.set("mediaFileIds", {} );
-        this.set("inventoryIds", [] );
-        this.set("_links", [] );
+      initialize: function () {
+        this.set("optionDefinitions", {});
+        this.set("extraInfo", {});
+        this.set("mediaFileIds", {});
+        this.set("inventoryIds", []);
+        this.set("_links", []);
       },
       validate: function (attrs, options) {
         if (!attrs.name) {
@@ -64,43 +76,25 @@ define("model/productModel", ["backbone"], function (Backbone) {
        * We'll see how this works
        * @returns {string}
        */
-      url: function url() {
-        var link = this._links.find(function (lnk) {
-          lnk.rel == "self"
+      url: prefix + "product"
+
+    });
+
+    obj['ProductCollection'] = Backbone.Collection.extend({
+      model: obj.Product,
+      url: prefix + "product",
+      parse: function (productList) {
+        return productList.map(function (product) {
+          /// take the main image link out of the _links array
+          // and make it a first-class member for the UI only.
+          var mainImageLink = (product._links || []).find(function (lnk) {
+            return lnk.rel == "main";
+          });
+          if (mainImageLink)
+            product.mainImageLink = mainImageLink.href;
+          return product;
         });
-        return link.href;
       }
-    }),
-    Customer: Backbone.Model.extend({
-
-      defaults: {
-        id: "",
-        name: "",
-        email: "",
-        status: "NOT-AVAILABLE",
-        mediaFileIds: null,
-        inventoryIds: null,
-        _links: null
-      },
-
-
-    }),
-
-    Category: Backbone.Model.extend({
-
-      defaults: {
-        id: "",
-        name: "",
-        displayName: "",
-        children: [],
-        classifier : false,
-        _links: null
-      },
-
-
-    }),
-
-  }
-  self = obj;
+    });
   return obj;
 });

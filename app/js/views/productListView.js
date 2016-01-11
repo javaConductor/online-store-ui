@@ -7,9 +7,7 @@ define("views/productListView",
     "backbone"
   ],
   function (ProductModel, Q, Backbone) {
-
-  var prefix = "http://" + window.location.hostname + ":8889/";
-
+    console.log("Product List View ProductModel:"+ProductModel);
     return  Backbone.View.extend({
       initialize: function(options) {
 

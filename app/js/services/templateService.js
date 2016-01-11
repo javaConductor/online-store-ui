@@ -4,13 +4,13 @@
 define("services/templateService",["jquery", "q"], function ($, Q) {
   var self;
   var templateFnCache = {};
-  var prefix = "http://" + window.location.hostname + ":8888/";
+  var prefix = "http://" + window.location.hostname + ":" + window.location.port + "/";
   console.log("creating services/templateService");
 
     var obj =  {
 
       getProductTemplate : function(){
-        return self.getTemplate("product.html")
+        return self.getTemplate("product-detail.html")
       },
 
       getCategoryProductTemplate : function(){

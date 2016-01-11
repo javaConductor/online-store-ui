@@ -8,7 +8,7 @@ require.config({
     "bootstrap": "/libs/bootstrap/dist/js/bootstrap.min",
     "q": "/libs/q/q",
     "underscore": "/libs/underscore/underscore-min",
-    backbone: '/libs/backbone/backbone-min',
+    backbone: '/libs/backbone/backbone',
     'backbone.localStorage': '/libs/backbone.localStorage/backbone.localStorage'
   },
   shim: {

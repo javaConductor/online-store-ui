@@ -1,7 +1,7 @@
 define("app",
-  ["jquery", 'routes/appRouter', "backbone"],
-  function ($, Router, Backbone ) {
-    console.log("creating app: Router: "+Router+ " backbone:"+Backbone+ " $:"+$);
+  ["jquery", 'routes/appRouter', "backbone","services/productService"],
+  function ($, Router, Backbone, productService ) {
+    console.log("creating app: Router: "+Router+ " productService:"+productService+ " $:"+$);
     var router = new Router({});
     router.on('route:main', function(actions) {
       alert(actions);
@@ -14,6 +14,8 @@ define("app",
       start: function(){
       }
     };
+
+
 
     self = obj;
     return obj;

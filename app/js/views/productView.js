@@ -4,20 +4,20 @@
 define("views/productView",
   ["model/productModel",
     "q",
-    "backbone",     "services/templateService"
+    "backbone",
+    "services/templateService"
   ],
   function (ProductModel, Q, Backbone, templateService) {
 
   var prefix = "http://" + window.location.hostname + ":8889/";
-
+  var templatePromise;
     return  Backbone.View.extend({
       initialize: function(options) {
-
+        this.template = options.template;
       },
 
       className: "product",
       model: ProductModel.ProductCollection,
-      template: templateService.getProductTemplate(),
       assign : function (selector, view) {
         var selectors;
         if (_.isObject(selector)) {
