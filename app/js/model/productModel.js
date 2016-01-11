@@ -92,6 +92,8 @@ define("model/productModel", ["backbone"], function (Backbone) {
           });
           if (mainImageLink)
             product.mainImageLink = mainImageLink.href;
+          else
+            product.mainImageLink = "/images/no_image_available.jpg";
           return product;
         });
       }
