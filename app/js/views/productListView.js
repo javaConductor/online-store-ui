@@ -28,7 +28,7 @@ define("views/productListView",
         }
         if (!selectors) return;
         _.each(selectors, function (view, selector) {
-          view.setElement(this.$(selector)).render();
+            view.setElement(this.$(selector)).render();
         }, this);
       },
       render: function () {

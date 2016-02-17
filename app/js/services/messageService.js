@@ -10,7 +10,6 @@ define("messageService",
     var self;
 
     /// create the view
-
     var obj = {
 
       error: function (msg) {

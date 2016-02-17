@@ -1,7 +1,7 @@
 /**
  * Created by lcollins on 1/3/2016.
  */
-define("services/productService",
+define("services/categoryService",
   ["model/productModel", "data",'q', "services/messageService","services/templateService","views/productView"],
   function (productModel, dataService, Q, messageService, templateService, ProductView) {
   var prefix = "http://" + window.location.hostname + ":8889/";
@@ -13,7 +13,7 @@ define("services/productService",
 
     var obj =  {
 
-      createProductDetailView : function($parent, product){
+      getCategoryTreecreateProductDetailView : function($parent, product){
         return templateService.getProductDetailTemplate().then(function(template){
           return  new ProductView({
             el: $parent,
@@ -36,9 +36,6 @@ define("services/productService",
       },
 
       createCategoryProductListView : function($parent, categoryId ){
-
-
-
       },
 
       createProductCompactView : function($parent, product){
@@ -55,25 +52,18 @@ define("services/productService",
         dataService.getProductsForCategory(categoryId).then(function(productIdList){
           return productIdList;
         }, function (err) {
-
+          messageService.error("CategoryService: Error getting products for category: " + categoryId+": "+err );
+          console.log("CategoryService: Error getting category tree: " + categoryId+": "+err  );
         });
       },
 
-      getProduct: function(id){
-        var p = productCollection.where({ id : id});
-        if (!p || p.length == 0){
-          return dataService.getProduct(id).then(function(product){
-            product = productCollection.parse([product])[0];
-            var pModel = new productModel.Product( product );
-            productCollection.add(pModel);
-            return pModel;
+      getCategoryTree: function(){
+          return dataService.getCategoryTree().then(function(categoryTree){
+            return categoryTree;;
           },function(err){
-            messageService.error("ProductService: Error getting product: " + id+": "+err );
-            console.log("ProductService: Error getting product: " + id+": "+err  );
+            messageService.error("CategoryService: Error getting category tree: " + id+": "+err );
+            console.log("CategoryService: Error getting category tree: " + id+": "+err  );
           })
-        }else{
-          return Q(p);
-        }
       }
     };
 

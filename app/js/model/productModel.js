@@ -8,7 +8,7 @@ define("model/productModel", ["backbone"], function (Backbone) {
   console.log("creating productModel");
   var obj = {};
 
-  obj['Customer'] = Backbone.Model.extend({
+    obj['Customer'] = Backbone.Model.extend({
 
     defaults: {
       id: "",
@@ -35,7 +35,7 @@ define("model/productModel", ["backbone"], function (Backbone) {
 
     obj['CategoryCollection'] = Backbone.Collection.extend({
       model: obj.Category,
-      url: prefix + "category"
+      url: prefix + "category/tree"
     });
 
     obj['Product'] = Backbone.Model.extend({
@@ -95,5 +95,6 @@ define("model/productModel", ["backbone"], function (Backbone) {
         });
       }
     });
+
   return obj;
 });

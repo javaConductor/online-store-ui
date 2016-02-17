@@ -18,7 +18,11 @@ define("services/templateService",["jquery", "q"], function ($, Q) {
       },
 
       getCategoryProductTemplate : function(){
-        return self.getTemplate("category-products.html")
+        return self.getProductListTemplate();
+      },
+
+      getProductListTemplate : function(){
+        return self.getTemplate("product-list.html")
       },
 
       getTemplate : function(filename){

@@ -1,7 +1,7 @@
 /**
  * Created by lcollins on 12/27/2015.
  */
-define("data", ["q"], function (Q) {
+define("data", ["q","services/messageService"], function (Q, messageService) {
 
   var prefix = "http://" + window.location.hostname + ":8889/";
   var self;
@@ -17,7 +17,16 @@ define("data", ["q"], function (Q) {
     getProducts:function(){
       var p = Q($.get(prefix + "product"));
       p.fail( function(err){
-        console.log("getProducts Error: "+err)
+        console.log("getProducts Error: "+err);
+      });
+      return p;
+    },
+
+    getProductsForCategory:function(categoryId){
+      var p = Q($.get(prefix + "product/for-category/"+categoryId));
+      p.fail( function(err){
+        messageService.error(err);
+        console.log("getProducts for category Error: "+err);
       });
       return p;
     },
@@ -25,7 +34,8 @@ define("data", ["q"], function (Q) {
     getProduct:function(id){
       var p = Q($.get(prefix + "product/"+id));
       p.fail( function(err){
-        console.log("getProducts Error: "+err)
+        messageService.error(err);
+        console.log("getProduct Error: "+err);
       });
       return p;
     },
@@ -33,7 +43,8 @@ define("data", ["q"], function (Q) {
     getCategoryTree:function(){
       var p = Q($.get(prefix + "category/tree"));
       p.fail( function(err){
-        console.log("getCategoryTree Error: "+err)
+        messageService.error ( err );
+        console.log("getCategoryTree Error: "+err);
       });
       return p;
     }

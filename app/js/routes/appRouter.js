@@ -11,15 +11,25 @@ define("routes/appRouter",
       routes: {
         "product/:id": "showProductDetail",   // #search/kiwis/p7
         "category/:categoryId/products": "showCategoryProductList",   // #search/kiwis/p7
+        "cart": "showCart",   // #search/kiwis/p7
         "*main": "main"
       },
 
       main: function () {
-        alert("route: main")
+        alert("route: main");
+      },
+
+      showCart: function showCart () {
+        alert("route: cart");
+
+        $("#main").empty();
+        $("#main").append("<a href='javascript:;' class='simpleCart_checkout'>-------------------------------</a>");
       },
 
       showCategoryProductList: function (categoryId) {
-        cate
+        productService.getProductsForCategory(categoryId).then(function( productIdList  ){
+          productService.createProductList( productIdList )
+        })
       },
 
       showProductDetail: function (productId) {
