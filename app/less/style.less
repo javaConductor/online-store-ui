@@ -4,9 +4,11 @@
 body {
   background-color: #67b168;
 }
+
 .product {
   background-color: @nice-blue;
 }
+
 .header {
   text-align: center;
   margin: auto;
@@ -16,13 +18,14 @@ body {
   padding-left: 0px;
 }
 
-.main-content{
+.main-content {
   min-height: 130px;
   min-width: 70%;
 
   /*background: #dbdfe5;*/
 }
-.main{
+
+.main {
   min-height: 130px;
   min-width: 70%;
   background-color: @nice-blue;
@@ -30,19 +33,46 @@ body {
 
   /*background: #dbdfe5;*/
 }
-.sidebar-content{
+
+.sidebar-content {
   min-height: 150px;
   margin-bottom: 30px;
   /*background: #b4bac0;*/
 }
 
+@product-single-width: 250px;
+
+.product-single-image {
+  overflow: auto;
+  min-width: @product-single-width - 10;
+  max-width: @product-single-width - 10;
+  max-height: 260px;
+  min-height: 260px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .product-single {
-  min-width: 80px;
-  max-width: 80px;
+  border: rgba(0, 0, 255, 0.98);
+  min-width: @product-single-width;
+  max-width: @product-single-width;
   background-color: @nice-blue;
 }
 
-.product-title{
+.product-title {
+  margin: auto;
+  min-height: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 0px;
+}
+
+.product-price {
+  margin: auto;
+  color: @nice-blue;
+  font-size: x-large;
+  min-width: @product-single-width;
+  max-width: @product-single-width;
   min-height: 15px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -53,10 +83,11 @@ body {
   background-color: @nice-blue;
 }
 
-
-.product-cost-content{
+.product-cost-content {
   min-height: 50px;
   background: #f8f8f8;
+  min-width: @product-single-width;
+  max-width: @product-single-width;
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 0px;
@@ -67,7 +98,7 @@ body {
   border-right-width: 0px;
 }
 
-.product-brand-content{
+.product-brand-content {
   min-height: 50px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -79,28 +110,28 @@ body {
   border-right-width: 0px;
 }
 
-.addtocart-content{
+.addtocart-content {
   min-height: 50px;
   padding-top: 15px;
   padding-bottom: 5px;
   padding-left: 0px;
 }
 
-.product-description-title{
+.product-description-title {
   min-height: 15px;
   padding-top: 30px;
   padding-bottom: 0px;
   padding-left: 0px;
 }
 
-.product-description{
+.product-description {
   min-height: 0px;
   padding-top: 0px;
   padding-bottom: 15px;
   padding-left: 0px;
 }
 
-.product-attributes{
+.product-attributes {
   min-height: 30px;
   padding-top: 0px;
   padding-bottom: 5px;
@@ -108,6 +139,52 @@ body {
 
 }
 
-ul  {
+ul {
   list-style: square url("/assets/img/sqgold.jpg");
+}
+
+.dropdown-menu > li {
+  position: relative;
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.dropdown-menu .sub-menu {
+  left: 100%;
+  position: absolute;
+  top: 0;
+  display: none;
+  margin-top: -1px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left-color: #fff;
+  box-shadow: none;
+}
+
+.right-caret:after, .left-caret:after {
+  content: "";
+  border-bottom: 5px solid transparent;
+  border-top: 5px solid transparent;
+  display: inline-block;
+  height: 0;
+  vertical-align: middle;
+  width: 0;
+  margin-left: 5px;
+}
+
+.right-caret:after {
+  border-left: 5px solid #ffaf46;
+}
+
+.left-caret:after {
+  border-right: 5px solid #ffaf46;
+}
+
+tr.category {
+  background-color: #000044;
 }

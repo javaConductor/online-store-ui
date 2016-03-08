@@ -13,6 +13,8 @@
   <script src="libs/jquery/dist/jquery.min.js" ></script>
   <script src="libs/jquery-tiny-pubsub/dist/ba-tiny-pubsub.js" ></script>
   <script src="libs/bootstrap/dist/js/bootstrap.min.js" ></script>
+  <script src="libs/bootstrap/js/transition.js"></script>
+  <script src="libs/bootstrap/js/collapse.js"></script>
   <script src="libs/simplecart-js/simpleCart.js" ></script>
 
   <base href="/">
@@ -26,7 +28,7 @@
 <script>
   $(function(  ){
     require(["app"],function(app){
-      app.start( "#index-main" );
+      app.start("#menu", "#main");
     });
   });
 </script>
@@ -35,7 +37,10 @@
 </div>
 <table class="main-content">
   <tr class="  header">
-    <th class="header"><h1>Online Store</h1></th>
+    <th class="header" id="header"><h1>Online Store</h1></th>
+  </tr>
+  <tr class="main category">
+    <td width='20%' class="menu" id="menu"></td>
   </tr>
   <tr class="main">
     <td class="main" id="main"></td>

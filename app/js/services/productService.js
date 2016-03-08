@@ -51,11 +51,11 @@ define("services/productService",
         });
       },
 
-      getProductsForCategory : function($parent, categoryId){
-        dataService.getProductsForCategory(categoryId).then(function(productIdList){
-          return productIdList;
+      getProductsForCategory: function (categoryId) {
+        return dataService.getProductsForCategory(categoryId).then(function (productList) {
+          return productList;
         }, function (err) {
-
+          messageService.error(err);
         });
       },
 

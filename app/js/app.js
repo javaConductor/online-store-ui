@@ -1,7 +1,9 @@
 define("app",
   ["jquery", 'routes/appRouter', "backbone","services/productService",
-  "views/categoryMenuView"],
-  function ($, Router, Backbone, productService, MenuView ) {
+    "views/categoryMenuView",
+    "views/categoryProductView"
+  ],
+  function ($, Router, Backbone, productService, MenuView, ProductView) {
     console.log("creating app: Router: "+Router+ " productService:"+productService+ " $:"+$);
     var router = new Router({});
     router.on('route:main', function(actions) {
@@ -12,10 +14,13 @@ define("app",
     Backbone.history.start();
     var self;
     var obj = {
-      start: function(selector){
-        var $parent = $(selector);
+      start: function (menuSelector, mainSelector) {
+        var $parent = $(menuSelector);
         var menuView = new MenuView({
-          targetSelector : selector
+          targetSelector: menuSelector
+        });
+        var mainView = new ProductView({
+          targetSelector: mainSelector
         });
       }
     };
