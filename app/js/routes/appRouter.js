@@ -2,8 +2,9 @@
  * Created by lcollins on 1/1/2016.
  */
 define("routes/appRouter",
-  ["backbone", "services/productService", "views/productView", "services/messageService"],
-  function (Backbone, productService, ProductView, messageService) {
+  ["backbone", "services/productService", "views/categoryMenuView", "views/productView",
+    "services/messageService", 'services/categoryService', 'views/categoryProductView'],
+  function (Backbone, productService, CategoryMenuView, ProductView, messageService, categoryService, CategoryProductView) {
     console.log("creating appRouter");
 
     var appRouter = Backbone.Router.extend({
@@ -27,9 +28,15 @@ define("routes/appRouter",
       },
 
       showCategoryProductList: function (categoryId) {
-        productService.getProductsForCategory(categoryId).then(function( productIdList  ){
-          productService.createProductList( productIdList )
-        })
+        var category
+        categoryService.getCategory(categoryId).then(function (cat) {
+          category = cat;
+          return productService.getProductsForCategory(categoryId).then(function (productIdList) {
+            $('#main').empty();
+            var v = new CategoryProductView({targetSelector: '#main', category: category});
+            v.render();
+          });
+        });
       },
 
       showProductDetail: function (productId) {
@@ -51,5 +58,6 @@ define("routes/appRouter",
       }
     });
 
+    var self = appRouter;
     return appRouter;
   });

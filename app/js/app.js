@@ -10,6 +10,13 @@ define("app",
       alert(actions);
     });
 
+    $.subscribe("/category/select", function (e, category) {
+      self.category = category;
+      console.log("Got " + e + " message w category: " + JSON.stringify(category));
+      console.log("Rendering view " + $(self.targetSelector));
+      router.navigate("category/" + category.id + "/products", {trigger: true, replace: true});
+    });
+
 // Start Backbone history - a necessary step for bookmarkable URL's
     Backbone.history.start();
     var self;
@@ -25,6 +32,7 @@ define("app",
       }
     };
 
+    window.app = obj;
     self = obj;
     return obj;
   }

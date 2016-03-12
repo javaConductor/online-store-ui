@@ -22,7 +22,6 @@ define("model/productModel", ["backbone"], function (Backbone) {
   });
 
     obj['Category'] = Backbone.Model.extend({
-
       defaults: {
         id: "",
         name: "",
@@ -33,6 +32,27 @@ define("model/productModel", ["backbone"], function (Backbone) {
       }
     });
 
+  obj['Cart'] = Backbone.Model.extend({
+    defaults: {
+      lastItemId: 0
+    },
+    initialize: function (options) {
+      this.set("items", []);
+    }
+
+  });
+
+  obj['CartItem'] = Backbone.Model.extend({
+    defaults: {
+      productId: "",
+      name: "",
+      description: "",
+      quantity: 0,
+      price: 0.0
+    }
+
+  });
+
     obj['CategoryCollection'] = Backbone.Collection.extend({
       model: obj.Category,
       url: prefix + "category/tree"
@@ -41,6 +61,7 @@ define("model/productModel", ["backbone"], function (Backbone) {
     obj['Product'] = Backbone.Model.extend({
       defaults: {
         id: "",
+        sku: "",
         name: "",
         optionDefinitions: null,
         categoryId: "",

@@ -5,11 +5,23 @@
   <div class="product-title">
     <span class="product-title"><%= name %></span>
   </div>
+  <% if (optionDefinitions) { %>
+  <% console.log(JSON.stringify(optionDefinitions)) %>
+  <div id='product_options_<%= id %> ' class="product-attributes container-fluid">
+    <% _.each(optionDefinitions, function(optDef, key, list ){ %>
+    <div class="row">
+      <%= showOption($('#product_options_'+ id), key, optDef).html() %>
+      <% console.log(key + ':'+JSON.stringify(optDef)) %>
+    </div>
+    <% }) %>
+  </div>
+  <% } %>
   <div class="product-cost-content">
     <span class="product-cost-content product-price"> $<%= price.toFixed(2) %></span>
   </div>
   <div class="addtocart-content">
-    <button type="button" class="btn btn-warning btn-md"><span class="glyphicon glyphicon-shopping-cart"></span>Add To
+    <button type="button" class="btn btn-warning btn-md addtocart-content"><span
+      class="glyphicon glyphicon-shopping-cart"></span>Add To
       Cart
     </button>
   </div>
