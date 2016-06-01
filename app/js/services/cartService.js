@@ -1,22 +1,43 @@
 /**
  * Created by lcollins on 1/1/2016.
  */
-define("services/cartService", ["jquery", "q", 'model/productModel'], function ($, Q, model) {
-  var self;
-  var templateFnCache = {};
-  var prefix = "http://" + window.location.hostname + ":" + window.location.port + "/";
-  console.log("creating services/templateService");
+define("services/cartService", [
+        "jquery",
+        "q",
+        'model/productModel',
+        "services/templateService"],
+    function ($, Q, model, templateService) {
+        var self;
+        console.log("creating services/cartService");
 
-  var cart = new model.Cart();
+        var cart = new model.Cart();
+        var obj = {
+            addToCart: function (product, options) {
+                return cart.addItem(product, options);
+            },
 
-  var obj = {
-    addToCart: function (product) {
+            updateQuantity: function (cartItemId, qty) {
 
-    },
-    updateQuantity: function (cartItemId, qty) {
+                var items = cart.get("items");
+                var updItem = items.find(function (item) {
+                    return cartItemId == item.get("id");
+                });
+                if (!updItem) {
+                    throw "No such cart item: " + cartItemId;
+                }
+                return updItem.set("quantity", +qty);
+            },
 
-    }
-  };
-  self = obj;
-  return obj;
-});
+            createCartView: function ($parent, c) {
+                return new model.CartView({
+                    el: $parent,
+                    model: c || cart,
+                    template: template
+                });
+            }
+        };
+
+
+        self = obj;
+        return obj;
+    });

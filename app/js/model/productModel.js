@@ -3,119 +3,130 @@
  */
 define("model/productModel", ["backbone"], function (Backbone) {
 
-  var prefix = "http://" + window.location.hostname + ":8889/";
+    var prefix = "http://" + window.location.hostname + ":8889/";
 
-  console.log("creating productModel");
-  var obj = {};
+    console.log("creating productModel");
+    var obj = {};
 
     obj['Customer'] = Backbone.Model.extend({
 
-    defaults: {
-      id: "",
-      name: "",
-      email: "",
-      status: "NOT-AVAILABLE",
-      mediaFileIds: null,
-      inventoryIds: null,
-      _links: null
-    }
-  });
-
-    obj['Category'] = Backbone.Model.extend({
-      defaults: {
-        id: "",
-        name: "",
-        displayName: "",
-        children: [],
-        classifier: false,
-        _links: null
-      }
+        defaults: {
+            id: "",
+            name: "",
+            email: "",
+            status: "NOT-AVAILABLE",
+            mediaFileIds: null,
+            inventoryIds: null,
+            _links: null
+        }
     });
 
-  obj['Cart'] = Backbone.Model.extend({
-    defaults: {
-      lastItemId: 0
-    },
-    initialize: function (options) {
-      this.set("items", []);
-    }
+    obj['Category'] = Backbone.Model.extend({
+        defaults: {
+            id: "",
+            name: "",
+            displayName: "",
+            children: [],
+            classifier: false,
+            _links: null
+        }
+    });
 
-  });
+    obj['Cart'] = Backbone.Model.extend({
+        defaults: {
+            lastItemId: 0
+        },
+        initialize: function (options) {
+            this.set("items", []);
+        },
+        addItem: function (product, options) {
+            var item = new obj['CartItem']({
+                productId: product.id,
+                name: product.name,
+                description: product.description,
+                quantity: 1,
+                price: product.price,
+                options: options
+            });
+            this.get("items").add(item);
+            return this.get("items");
+        }
+    });
 
-  obj['CartItem'] = Backbone.Model.extend({
-    defaults: {
-      productId: "",
-      name: "",
-      description: "",
-      quantity: 0,
-      price: 0.0
-    }
+    obj['CartItem'] = Backbone.Model.extend({
+        defaults: {
+            productId: "",
+            name: "",
+            description: "",
+            quantity: 0,
+            price: 0.0
+        }
 
-  });
+    });
 
     obj['CategoryCollection'] = Backbone.Collection.extend({
-      model: obj.Category,
-      url: prefix + "category/tree"
+        model: obj.Category,
+        url: prefix + "category/tree"
     });
 
     obj['Product'] = Backbone.Model.extend({
-      defaults: {
-        id: "",
-        sku: "",
-        name: "",
-        optionDefinitions: null,
-        categoryId: "",
-        description: "",
-        weightInOunces: 0.0,
-        extraInfo: null,
-        currency: "USD",
-        price: -1,
-        status: "NOT-AVAILABLE",
-        mediaFileIds: null,
-        inventoryIds: null,
-        _links: null
-      },
-      initialize: function () {
-        this.set("optionDefinitions", {});
-        this.set("extraInfo", {});
-        this.set("mediaFileIds", {});
-        this.set("inventoryIds", []);
-        this.set("_links", []);
-      },
-      validate: function (attrs, options) {
-        if (!attrs.name) {
-          return "Product name is required.";
-        }
-        if (attrs.price < 0) {
-          return "Product price not set.";
-        }
-        if (!attrs.currency) {
-          return "Product price currency not set.";
-        }
-      },
-      /**
-       * We'll see how this works
-       * @returns {string}
-       */
-      url: prefix + "product"
+        defaults: {
+            id: "",
+            sku: "",
+            name: "",
+            optionDefinitions: null,
+            categoryId: "",
+            description: "",
+            weightInOunces: 0.0,
+            extraInfo: null,
+            currency: "USD",
+            price: -1,
+            status: "NOT-AVAILABLE",
+            mediaFileIds: null,
+            inventoryIds: null,
+            _links: null
+        },
+        initialize: function () {
+            this.set("optionDefinitions", {});
+            this.set("extraInfo", {});
+            this.set("mediaFileIds", {});
+            this.set("inventoryIds", []);
+            this.set("_links", []);
+        },
+        validate: function (attrs, options) {
+            if (!attrs.name) {
+                return "Product name is required.";
+            }
+            if (attrs.price < 0) {
+                return "Product price not set.";
+            }
+            if (!attrs.currency) {
+                return "Product price currency not set.";
+            }
+        },
+        /**
+         * We'll see how this works
+         * @returns {string}
+         */
+        url: prefix + "product"
 
     });
 
     obj['ProductCollection'] = Backbone.Collection.extend({
-      model: obj.Product,
-      url: prefix + "product",
-      parse: function (productList) {
-        return productList.map(function (product) {
-          /// take the main image link out of the _links array
-          // and make it a first-class member for the UI only.
-          var mainImageLink = (product._links || []).find(function (lnk) {
-            return lnk.rel == "main";
-          });
-          product.mainImageLink = (mainImageLink) ? mainImageLink.href :  "/images/no_image_available.jpg";
-          return product;
-        });
-      }
+        model: obj.Product,
+        url: prefix + "product",
+        parse: function (productList) {
+            return productList.map(function (product) {
+                /// take the main image link out of the _links array
+                // and make it a first-class member for the UI only.
+                var mainImageLink = (product._links || []).find(function (lnk) {
+                    return lnk.rel == "main";
+                });
+                product.mainImageLink = (mainImageLink) ? mainImageLink.href : "/images/no_image_available.jpg";
+                return product;
+            });
+        }
     });
 
-  return obj;
+    return obj;
 });

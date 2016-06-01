@@ -88,3 +88,8 @@ body {
 ul {
   list-style: square url("/assets/img/sqgold.jpg");
 }
+
+.cart-subtotal {
+  text-align: right;
+}
+

@@ -2,9 +2,12 @@
  * Created by lcollins on 1/1/2016.
  */
 define("routes/appRouter",
-  ["backbone", "services/productService", "views/categoryMenuView", "views/productView",
-    "services/messageService", 'services/categoryService', 'views/categoryProductView'],
-  function (Backbone, productService, CategoryMenuView, ProductView, messageService, categoryService, CategoryProductView) {
+  ["backbone", "services/productService", "views/productView",
+    "services/messageService", 'services/categoryService', 
+    'views/categoryProductView', 'services/cartService'],
+  function (Backbone, productService, 
+            ProductView, messageService, 
+            categoryService, CategoryProductView, cartService) {
     console.log("creating appRouter");
 
     var appRouter = Backbone.Router.extend({
@@ -22,9 +25,8 @@ define("routes/appRouter",
 
       showCart: function showCart () {
         alert("route: cart");
-
         $("#main").empty();
-        $("#main").append("<a href='javascript:;' class='simpleCart_checkout'>-------------------------------</a>");
+          cartService.createCartView($('main'));
       },
 
       showCategoryProductList: function (categoryId) {
