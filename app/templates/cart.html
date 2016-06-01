@@ -6,12 +6,21 @@
       <th>Quantity</th>
       <th>Price</th>
     </tr>
-    <%- _.each(items. function(cartItem ){ %>
+    <%- _.each(items, function(cartItem ){ %>
     <tr>
       <td><%= cartItem.name %></td>
       <td><%= cartItem.description %></td>
       <td><input class="cart-item-quantity" type="number" value="<%= cartItem.quantity %>"/></td>
       <td><%= cartItem.price.toFixed(2) %></td>
+    </tr>
+    <tr>
+      <td colspan="3" class="cart-subtotal">Subtotal</td>
+      <td ><%= _.reduce(
+        _.map(items,
+          function(item){
+            return item.quantity * item.price;}),
+        function(acc, num){ return acc + num; },
+        0).toFixed(2) %></td>
     </tr>
     <% }); %>
   </table>

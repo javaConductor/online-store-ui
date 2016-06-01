@@ -22,7 +22,6 @@ define("app",
     var self;
     var obj = {
       start: function (menuSelector, mainSelector) {
-        var $parent = $(menuSelector);
         var menuView = new MenuView({
           targetSelector: menuSelector
         });
@@ -32,6 +31,7 @@ define("app",
       }
     };
 
+    console.log("created app: " + obj);
     window.app = obj;
     self = obj;
     return obj;
