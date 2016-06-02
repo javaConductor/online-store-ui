@@ -3,10 +3,10 @@
  */
 define("routes/appRouter",
   ["backbone", "services/productService", "views/productView",
-    "services/messageService", 'services/categoryService', 
+    "services/messageService", 'services/categoryService',
     'views/categoryProductView', 'services/cartService'],
-  function (Backbone, productService, 
-            ProductView, messageService, 
+  function (Backbone, productService,
+            ProductView, messageService,
             categoryService, CategoryProductView, cartService) {
     console.log("creating appRouter");
 
@@ -26,7 +26,7 @@ define("routes/appRouter",
       showCart: function showCart () {
         alert("route: cart");
         $("#main").empty();
-          cartService.createCartView($('main'));
+        cartService.createCartView($('#main'), cartService.userCart());
       },
 
       showCategoryProductList: function (categoryId) {

@@ -8,14 +8,18 @@ define("views/cartView",
     "services/templateService"
   ],
   function (ProductModel, Q, Backbone, templateService) {
-    
+    var self;
     return  Backbone.View.extend({
       initialize: function(options) {
+        self = this;
         this.cart = options.cart;
+        this.$parent = options.el;
+        this.el = options.el;
+        this.render();
       },
       tagName: "div",
       className: "shopping-cart",
-      template: templateService.getCartDisplayTemplate(),
+      pTemplate: templateService.getCartDisplayTemplate(),
       assign : function (selector, view) {
         var selectors;
         if (_.isObject(selector)) {
@@ -31,8 +35,11 @@ define("views/cartView",
         }, this);
       },
       render: function () {
-        this.$el.html(this.template(this.cart.attributes));//might not b the way to get attribute
-        return this;
-      },
+        self.pTemplate.then(function (template) {
+          self.$el.html(template(self.cart.attributes));//might not b the way to get attribute
+          //this.$parent.append(this.$el);
+        });
+        return self;
+      }
     });
 });

@@ -7,11 +7,15 @@ define("views/categoryProductView",
     "underscore",
     "q",
     "utils",
-    "backbone", "services/templateService"
+    "backbone",
+    "services/templateService",
+    "services/cartService"
   ],
-  function (productService, messageService, _, Q, utils, Backbone, templateService) {
+  function (productService, messageService, _, Q, utils, Backbone, templateService, cartService) {
 
-
+    var targetSelector;
+    var self;
+    var pTemplate = templateService.getProductTemplate();
     var viewHelper = {
       showOption: function ($parent, name, optDef) {
         console.log('showOption: ' + name)
@@ -60,7 +64,6 @@ define("views/categoryProductView",
       }
     };
 
-    var pTemplate = templateService.getProductTemplate();
 
     var renderCategoryView = function renderCategoryView($parent, category) {
       return pTemplate.then(function (templateFn) {
@@ -75,6 +78,9 @@ define("views/categoryProductView",
               var $product = $(templateFn(product));
               $product.addClass('col-xs-12  col-sm-6 col-md-4 col-lg-3');
               $product.attr('id', 'thumb_' + product.id);
+              $product.on("click", function (e) {
+                cartService.addToCart(product, {});
+              })
               $row.append($product);
             });
             $container.append($row);
@@ -88,8 +94,7 @@ define("views/categoryProductView",
         ;
 
     };
-    var targetSelector;
-    var self;
+
     return  Backbone.View.extend({
       initialize: function(options) {
         self = this;

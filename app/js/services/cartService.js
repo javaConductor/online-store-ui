@@ -29,10 +29,13 @@ define("services/cartService", [
                 return updItem.set("quantity", +qty);
             },
 
+          userCart: function () {
+            return cart;
+          },
             createCartView: function ($parent, c) {
                 return new CartView({
                     el: $parent,
-                    model: c || cart,
+                  cart: c,
                     template: template
                 });
             }

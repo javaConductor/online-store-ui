@@ -48,7 +48,7 @@ define("model/productModel", ["backbone"], function (Backbone) {
                 price: product.price,
                 options: options
             });
-            this.get("items").add(item);
+          this.get("items").push(item);
             return this.get("items");
         }
     });
