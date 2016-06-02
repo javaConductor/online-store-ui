@@ -5,11 +5,12 @@ define("services/cartService", [
         "jquery",
         "q",
         'model/productModel',
-        "services/templateService"],
-    function ($, Q, model, templateService) {
+        "services/templateService",
+"views/cartView"],
+    function ($, Q, model, templateService, CartView) {
         var self;
         console.log("creating services/cartService");
-
+        var template = templateService.getCartDisplayTemplate();
         var cart = new model.Cart();
         var obj = {
             addToCart: function (product, options) {
@@ -29,7 +30,7 @@ define("services/cartService", [
             },
 
             createCartView: function ($parent, c) {
-                return new model.CartView({
+                return new CartView({
                     el: $parent,
                     model: c || cart,
                     template: template
