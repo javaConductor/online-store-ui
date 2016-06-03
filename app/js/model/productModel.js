@@ -1,7 +1,7 @@
 /**
  * Created by lcollins on 12/29/2015.
  */
-define("model/productModel", ["backbone"], function (Backbone) {
+define("model/productModel", ["backbone", "backbone.localStorage"], function (Backbone, BackboneLocalStorage) {
 
     var prefix = "http://" + window.location.hostname + ":8889/";
 
@@ -32,37 +32,25 @@ define("model/productModel", ["backbone"], function (Backbone) {
         }
     });
 
-    obj['Cart'] = Backbone.Model.extend({
-        defaults: {
-            lastItemId: 0
-        },
-        initialize: function (options) {
-            this.set("items", []);
-        },
-        addItem: function (product, options) {
-            var item = new obj['CartItem']({
-                productId: product.id,
-                name: product.name,
-                description: product.description,
-                quantity: 1,
-                price: product.price,
-                options: options
-            });
-          this.get("items").push(item);
-            return this.get("items");
-        }
+
+  obj['CartItem'] = Backbone.Model.extend({
+    defaults: {
+      productId: "",
+      name: "",
+      description: "",
+      quantity: 0,
+      price: 0.0
+    }
+
+  });
+
+  obj['Cart'] = Backbone.Collection.extend({
+    model: obj['CartItem'],
+    lastItemId: 0,
+    localStorage: new BackboneLocalStorage("cart")
     });
 
-    obj['CartItem'] = Backbone.Model.extend({
-        defaults: {
-            productId: "",
-            name: "",
-            description: "",
-            quantity: 0,
-            price: 0.0
-        }
 
-    });
 
     obj['CategoryCollection'] = Backbone.Collection.extend({
         model: obj.Category,

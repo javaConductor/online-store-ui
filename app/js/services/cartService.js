@@ -2,46 +2,74 @@
  * Created by lcollins on 1/1/2016.
  */
 define("services/cartService", [
-        "jquery",
-        "q",
-        'model/productModel',
-        "services/templateService",
-"views/cartView"],
-    function ($, Q, model, templateService, CartView) {
-        var self;
-        console.log("creating services/cartService");
-        var template = templateService.getCartDisplayTemplate();
-        var cart = new model.Cart();
-        var obj = {
-            addToCart: function (product, options) {
-                return cart.addItem(product, options);
-            },
+    "jquery",
+    "q",
+    'model/productModel',
+    "services/templateService",
+    "views/cartView"],
+  function ($, Q, model, templateService, CartView) {
+    var self;
+    console.log("creating services/cartService");
+    var pTemplate = templateService.getCartDisplayTemplate();
+    var cart = new model.Cart();
+    var obj = {
 
-            updateQuantity: function (cartItemId, qty) {
+      findCartItem: function (product, options) {
+        return cart.models.find(function (cartItem) {
+          return cartItem.productId == product.id && (_.isEqual(options, cartItem.options));
+        });
+      },
 
-                var items = cart.get("items");
-                var updItem = items.find(function (item) {
-                    return cartItemId == item.get("id");
-                });
-                if (!updItem) {
-                    throw "No such cart item: " + cartItemId;
-                }
-                return updItem.set("quantity", +qty);
-            },
+      findCartItemById: function (cartItemId) {
+        return cart.models.find(function (cartItem) {
+          return cartItem.id == cartItemId;
+        });
+      },
 
-          userCart: function () {
-            return cart;
-          },
-            createCartView: function ($parent, c) {
-                return new CartView({
-                    el: $parent,
-                  cart: c,
-                    template: template
-                });
-            }
-        };
+      updateQuantity: function (cartItemId, qty) {
+        var updItem = self.findCartItemById(cartItemId);
+        if (!updItem) {
+          throw "No such cart item: " + cartItemId;
+        }
+        return updItem.set("quantity", +qty);
+      },
 
+      addToCart: function (product, options) {
+        var item = self.findCartItem(product, options);
+        if (!item) {
 
-        self = obj;
-        return obj;
-    });
+          cart.lastItemId++;
+          var nextId = cart.lastItemId;
+          item = new model.CartItem({
+            id: nextId,
+            productId: product.id,
+            name: product.name,
+            description: product.description,
+            quantity: 1,
+            price: product.price,
+            options: options
+          });
+          cart.add(item);
+        } else {
+          self.updateQuantity(item.id, item.quantity + 1);
+        }
+        item.save();
+        return cart.models;
+      },
+
+      userCart: function () {
+        return cart;
+      },
+      createCartView: function ($parent, c) {
+        return pTemplate.then(function (template) {
+          return new CartView({
+            el: $parent,
+            cart: c,
+            template: template
+          });
+        });
+      }
+    };
+    self = obj;
+    return obj;
+  });

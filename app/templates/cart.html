@@ -1,24 +1,30 @@
 <div class="container">
-  <table>
+  <table class="cart-table">
     <tr>
       <th class="cart-name-col">Name</th>
       <th class="cart-description-col">Description</th>
       <th class="cart-quantity-col">Quantity</th>
       <th class="cart-price-col">Price</th>
     </tr>
-    <% _.each(items, function(cartItem ){ %>
+    <% _.each(models, function(cartItem ){ %>
     <tr>
-      <td class="cart-name-col"><%= cartItem.get("name") %></td>
+      <td class="cart-name-col"><%= cartItem.get("name") %><%= cartItem.get("name") %></td>
       <td class="cart-description-col"><%= cartItem.get("description") %></td>
-      <td class="cart-quantity-col"><input class="cart-item-quantity" type="number" value="<%= cartItem.quantity %>"/>
+      <td class="cart-quantity-col"><input class="cart-item-quantity" type="number" value="<%= cartItem.get(" quantity")
+        %>"/>
       </td>
       <td class="cart-price-col"> <%= cartItem.get("price").toFixed(2) %></td>
     </tr>
     <% }); %>
     <tr>
+      <td colspan="3">
+        <hr width="100%"/>
+      </td>
+    </tr>
+    <tr>
       <td colspan="3" class="cart-subtotal">Subtotal</td>
       <td ><%= _.reduce(
-        _.map(items,
+        _.map(models,
           function(item){
         return item.get("quantity") * item.get("price");
         }),

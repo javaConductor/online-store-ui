@@ -36,7 +36,7 @@ define("views/cartView",
       },
       render: function () {
         self.pTemplate.then(function (template) {
-          self.$el.html(template(self.cart.attributes));//might not b the way to get attribute
+          self.$el.html(template(self.cart));//might not b the way to get attribute
           //this.$parent.append(this.$el);
         });
         return self;

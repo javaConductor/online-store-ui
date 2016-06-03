@@ -6,9 +6,9 @@ define("app",
   function ($, Router, Backbone, productService, MenuView, ProductView) {
     console.log("creating app: Router: "+Router+ " productService:"+productService+ " $:"+$);
     var router = new Router({});
-    router.on('route:main', function(actions) {
-      alert(actions);
-    });
+    // router.on('route:main', function(actions) {
+    //   //alert(actions);
+    // });
 
     $.subscribe("/category/select", function (e, category) {
       self.category = category;
@@ -22,10 +22,10 @@ define("app",
     var self;
     var obj = {
       start: function (menuSelector, mainSelector) {
-        var menuView = new MenuView({
+        new MenuView({
           targetSelector: menuSelector
         });
-        var mainView = new ProductView({
+        new ProductView({
           targetSelector: mainSelector
         });
       }

@@ -20,13 +20,15 @@ define("routes/appRouter",
       },
 
       main: function () {
-        alert("route: main");
+        console.log("route: main");
       },
 
       showCart: function showCart () {
-        alert("route: cart");
+        console.log("route: cart - Showing Cart");
         $("#main").empty();
-        cartService.createCartView($('#main'), cartService.userCart());
+        cartService.createCartView($('#main'), cartService.userCart()).then(function (cartView) {
+          console.log("created cartView.");
+        });
       },
 
       showCategoryProductList: function (categoryId) {
