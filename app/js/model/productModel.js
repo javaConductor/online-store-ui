@@ -32,7 +32,6 @@ define("model/productModel", ["backbone", "backbone.localStorage"], function (Ba
         }
     });
 
-
   obj['CartItem'] = Backbone.Model.extend({
     defaults: {
       productId: "",
@@ -47,7 +46,11 @@ define("model/productModel", ["backbone", "backbone.localStorage"], function (Ba
   obj['Cart'] = Backbone.Collection.extend({
     model: obj['CartItem'],
     lastItemId: 0,
-    localStorage: new BackboneLocalStorage("cart")
+    localStorage: new BackboneLocalStorage("cart"),
+    fetch: function () {
+      console.log("===== FETCH FIRED LOADING LOCAL STORAGE ====");
+      //this.set(  JSON.parse(this.localStorage.getItem(this.id) ) );
+    }
     });
 
 

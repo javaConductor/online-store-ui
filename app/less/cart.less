@@ -3,6 +3,7 @@
 
 .cart {
   background-color: @nice-blue;
+  width: 100%;
 }
 
 .cart-product-title {
@@ -13,11 +14,9 @@
   padding-left: 0px;
 }
 
-.cart-product-price {
-  margin: auto;
-  color: @nice-blue;
-  font-size: x-large;
-  min-height: 15px;
+.cart-item-price {
+  text-align: right;
+  max-width: 3em;
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 0px;
@@ -26,11 +25,23 @@
 .cart-item-quantity {
   margin: auto;
   color: @nice-blue;
-  font-size: x-large;
-  min-height: 15px;
+  font-size: medium;
+  min-height: 1em;
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 0px;
+  max-width: 3em;
+}
+
+.cart-product-quantity {
+  margin: auto;
+  color: @nice-blue;
+  font-size: medium;
+  min-height: 1em;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 0px;
+  max-width: 3em;
 }
 
 .cart-product-name {
@@ -52,16 +63,29 @@
 
 }
 
+.cart-unit-price-col {
+  min-width: 6em;
+  text-align: center;
+}
 .cart-price-col {
   min-width: 100px;
   min-height: 30px;
 
 }
 
+.cart-unit-price-header {
+  min-width: 6em;
+  text-align: center;
+}
+
+.cart-price-header {
+  text-align: center;
+}
+
 .cart-quantity-col {
-  min-width: 60px;
-  max-width: 60px;
-  min-height: 30px;
+  min-width: 5em;
+  max-width: 6em;
+  min-height: 20px;
 }
 
 .cart-name-col {
@@ -78,4 +102,16 @@
 
 .cart-subtotal {
   font-weight: bold;
+}
+
+.cart-totals-col {
+  border-style: ridge;
+  min-width: 6em;
+}
+
+.toolbar {
+  width: 100%;
+  background: @nice-blue;
+  color: darken(@nice-blue, 50%);
+  border: ridge;
 }

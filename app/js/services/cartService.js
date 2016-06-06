@@ -12,17 +12,18 @@ define("services/cartService", [
     console.log("creating services/cartService");
     var pTemplate = templateService.getCartDisplayTemplate();
     var cart = new model.Cart();
+    cart.fetch();
     var obj = {
 
       findCartItem: function (product, options) {
         return cart.models.find(function (cartItem) {
-          return cartItem.productId == product.id && (_.isEqual(options, cartItem.options));
+          return cartItem.get("productId") == product.id && (_.isEqual(options, cartItem.get("options")));
         });
       },
 
       findCartItemById: function (cartItemId) {
         return cart.models.find(function (cartItem) {
-          return cartItem.id == cartItemId;
+          return cartItem.get("id") == cartItemId;
         });
       },
 
@@ -31,7 +32,8 @@ define("services/cartService", [
         if (!updItem) {
           throw "No such cart item: " + cartItemId;
         }
-        return updItem.set("quantity", +qty);
+        updItem.set("quantity", +qty);
+        updItem.save();
       },
 
       addToCart: function (product, options) {
@@ -51,7 +53,7 @@ define("services/cartService", [
           });
           cart.add(item);
         } else {
-          self.updateQuantity(item.id, item.quantity + 1);
+          self.updateQuantity(item.get("id"), item.get("quantity") + 1);
         }
         item.save();
         return cart.models;
