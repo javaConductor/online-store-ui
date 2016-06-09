@@ -4,10 +4,10 @@
 define("routes/appRouter",
   ["backbone", "services/productService", "views/productView",
     "services/messageService", 'services/categoryService',
-    'views/categoryProductView', 'services/cartService'],
+    'views/categoryProductView', 'services/cartService', 'views/cartView'],
   function (Backbone, productService,
             ProductView, messageService,
-            categoryService, CategoryProductView, cartService) {
+            categoryService, CategoryProductView, cartService, CartView) {
     console.log("creating appRouter");
 
     var appRouter = Backbone.Router.extend({
@@ -26,8 +26,9 @@ define("routes/appRouter",
       showCart: function showCart () {
         console.log("route: cart - Showing Cart");
         $("#main").empty();
-        cartService.createCartView($('#main'), cartService.userCart()).then(function (cartView) {
-          console.log("created cartView.");
+        return new CartView({
+          el: $('#main'),
+          cart: cartService.userCart()
         });
       },
 

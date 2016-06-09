@@ -9,7 +9,8 @@ require.config({
     "q": "/libs/q/q",
     "underscore": "/libs/underscore/underscore-min",
     backbone: '/libs/backbone/backbone',
-    'backbone.localStorage': '/libs/backbone.localStorage/backbone.localStorage'
+    'backbone.localStorage': '/libs/backbone.localStorage/backbone.localStorage',
+    'backbone.domStorage': '/libs/backbone.DOMStorage/backbone.domStorage'
   },
   shim: {
     underscore: {
@@ -25,6 +26,10 @@ require.config({
     'backbone.localStorage': {
       deps: ['backbone'],
       exports: 'Backbone.localStorage'
+    },
+    'backbone.domStorage': {
+      deps: ['backbone'],
+      exports: 'Backbone.domStorage'
     }
   },
   waitSeconds: 15

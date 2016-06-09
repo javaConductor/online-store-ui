@@ -1,7 +1,8 @@
 /**
  * Created by lcollins on 12/29/2015.
  */
-define("model/productModel", ["backbone", "backbone.localStorage"], function (Backbone, BackboneLocalStorage) {
+//define("model/productModel", ["backbone", "backbone.localStorage"], function (Backbone, BackboneLocalStorage) {
+define("model/productModel", ["backbone", "backbone.domStorage"], function (Backbone, BackboneLocalStorage) {
 
     var prefix = "http://" + window.location.hostname + ":8889/";
 
@@ -46,13 +47,12 @@ define("model/productModel", ["backbone", "backbone.localStorage"], function (Ba
   obj['Cart'] = Backbone.Collection.extend({
     model: obj['CartItem'],
     lastItemId: 0,
-    localStorage: new BackboneLocalStorage("cart"),
+    localStorage: new Backbone.SessionStorage("cart"),
     fetch: function () {
       console.log("===== FETCH FIRED LOADING LOCAL STORAGE ====");
       //this.set(  JSON.parse(this.localStorage.getItem(this.id) ) );
     }
     });
-
 
 
     obj['CategoryCollection'] = Backbone.Collection.extend({

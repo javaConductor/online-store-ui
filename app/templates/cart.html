@@ -1,7 +1,7 @@
 <div class="container">
   <table class="cart cart-table">
     <tr>
-      <!--<th class="cart-name-col">Name</th>-->
+      <th class="cart-remove-col">Remove</th>
       <th class="cart-description-col">Description</th>
       <th class="cart-quantity-col">Quantity</th>
       <th class="cart-unit-price-col cart-unit-price-header">Unit Price</th>
@@ -9,8 +9,14 @@
     </tr>
     <% _.each(models, function(cartItem ){ %>
     <tr>
-      <!--<td class="cart-name-col"><%= cartItem.get("name") %><%= cartItem.get("name") %></td>-->
-      <td class="cart-description-col"><%= cartItem.get("name") %> - <%= cartItem.get("description") %></td>
+      <td class="cart-item-remove-button">
+        <a href="#/cart" class="cart-item-remove-button" id="cart-item-remove-button_<%= cartItem.get('id') %>">
+          <span class="glyphicon glyphicon-remove-circle"></span>
+        </a>
+      </td>
+      <td class="cart-description-col"><%= cartItem.get("name") %> <%= cartItem.get("description") ? '-' : '' %><%=
+        cartItem.get("description") %>
+      </td>
       <td class="cart-quantity-col">
         <input class="cart-item-quantity"
                id="qty_<%= cartItem.get('id') %>"
@@ -27,12 +33,12 @@
     </tr>
     <% }); %>
     <tr>
-      <td colspan="4">
+      <td colspan="5">
         <hr width="100%"/>
       </td>
     </tr>
     <tr>
-      <td colspan="3" class="cart-subtotal">Subtotal</td>
+      <td colspan="4" class="cart-subtotal">Subtotal</td>
       <td id="cart-sub-total" class="cart-price-col  cart-item-price"><%= _.reduce(
         _.map(models,
           function(item){

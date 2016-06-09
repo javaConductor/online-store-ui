@@ -12,9 +12,8 @@ define("services/cartService", [
     console.log("creating services/cartService");
     var pTemplate = templateService.getCartDisplayTemplate();
     var cart = new model.Cart();
-    cart.fetch();
+    cart.add(cart.localStorage.findAll());
     var obj = {
-
       findCartItem: function (product, options) {
         return cart.models.find(function (cartItem) {
           return cartItem.get("productId") == product.id && (_.isEqual(options, cartItem.get("options")));
@@ -61,15 +60,6 @@ define("services/cartService", [
 
       userCart: function () {
         return cart;
-      },
-      createCartView: function ($parent, c) {
-        return pTemplate.then(function (template) {
-          return new CartView({
-            el: $parent,
-            cart: c,
-            template: template
-          });
-        });
       }
     };
     self = obj;
