@@ -10,6 +10,7 @@ require.config({
     "underscore": "/libs/underscore/underscore-min",
     backbone: '/libs/backbone/backbone',
     'backbone.localStorage': '/libs/backbone.localStorage/backbone.localStorage',
+    'backbone.modal': '/libs/backbone.modal/backbone.modal',
     'backbone.domStorage': '/libs/backbone.DOMStorage/backbone.domStorage'
   },
   shim: {
